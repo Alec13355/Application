@@ -1,0 +1,55 @@
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      # Log into Azure
+      - name: Login via Az module
+        uses: azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_CREDENTIALS}}
+          enable-AzPSSession: true 
+
+      # - name: Azure CLI script
+      #   uses: azure/CLI@v1
+      #   with:
+      #     inlineScript: |
+      #       az staticwebapp disconnect -n testSite
+
+      - name: Run Bicep deploy
+        id: deploy
+        uses: azure/arm-deploy@v1
+        with:
+          credentials: ${{ secrets.AZURE_CREDENTIALS }}
+          resourceGroupName: LTinterviewproj
+          template: ./deploy.bicep
+
+      - name: Build And Deploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ steps.deploy.outputs.deployment_token }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "./ui"
+          app_artifact_location: "dist/ui"
+
+      # - name: dotnet build and publish
+      #   run: |
+      #     dotnet restore
+      #     dotnet build --configuration Release
+      #     dotnet publish -c Release --property:PublishDir='${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp' 
+
+      # Azure logout
+      - name: logout
+        run: |
+          az logout

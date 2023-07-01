@@ -20,11 +20,11 @@ jobs:
           creds: ${{secrets.AZURE_CREDENTIALS}}
           enable-AzPSSession: true 
 
-      # - name: Azure CLI script
-      #   uses: azure/CLI@v1
-      #   with:
-      #     inlineScript: |
-      #       az staticwebapp disconnect -n testSite
+      - name: Azure CLI script
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az staticwebapp disconnect -n testSite
 
       - name: Run Bicep deploy
         id: deploy
@@ -43,11 +43,16 @@ jobs:
           app_location: "./ui"
           app_artifact_location: "dist/ui"
 
-      # - name: dotnet build and publish
-      #   run: |
-      #     dotnet restore
-      #     dotnet build --configuration Release
-      #     dotnet publish -c Release --property:PublishDir='${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp' 
+      - name: Publish
+        run: dotnet publish minimalAPI/minimalAPI.csproj -c Release -o website
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: wapp-pli47gh5nfjwu
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: minimalAPI
 
       # Azure logout
       - name: logout

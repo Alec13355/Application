@@ -37,4 +37,4 @@ resource staticSite 'Microsoft.Web/staticSites@2022-03-01' = {
 }
 
 #disable-next-line outputs-should-not-contain-secrets
-output deployment_token string = listSecrets(staticSite.id, staticSite.apiVersion).properties.apiKey
+output deployment_token string = staticSite.listSecrets().properties.apiKey

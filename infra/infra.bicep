@@ -27,6 +27,7 @@ resource appService 'Microsoft.Web/sites@2020-06-01' = {
 
 resource staticSite 'Microsoft.Web/staticSites@2022-03-01' = {
   name: 'testSite'
+#disable-next-line no-hardcoded-location
   location: 'westus2'
   properties: {}
   sku: {

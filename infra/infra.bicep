@@ -27,7 +27,7 @@ resource appService 'Microsoft.Web/sites@2020-06-01' = {
 
 resource staticSite 'Microsoft.Web/staticSites@2022-03-01' = {
   name: 'testSite'
-  location: location
+  location: 'westus2'
   properties: {}
   sku: {
     tier: 'Free'

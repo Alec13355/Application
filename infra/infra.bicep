@@ -1,5 +1,5 @@
 param location string = resourceGroup().location // Location for all resources
-param sku string = 'F1' // The SKU of App Service Plan
+param sku string = 'S1' // The SKU of App Service Plan
 var appServicePlanName = 'appserviceplan-pli47gh5nfjwu'
 var webSiteName = 'wapp-pli47gh5nfjwu'
 

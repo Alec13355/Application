@@ -69,10 +69,14 @@ describe('MinimalAPIService', () => {
       expect(component.listOfPhotos).toEqual([]);
     });
     it('should clear photoId', () => {
-      const photos: Photo[] = [{ id: 1, title: 'test' }];
       component.photoId = '123';
       component.clearAll();
-      expect(component.photoId).toEqual([]);
+      expect(component.photoId).toEqual('');
+    });
+    it('should clear apiLoading', () => {
+      component.apiLoading = true;
+      component.clearAll();
+      expect(component.apiLoading).toEqual(false);
     });
   });
 });

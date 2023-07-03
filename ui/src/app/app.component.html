@@ -64,7 +64,9 @@
     <br>
     <button mat-raised-button [disabled]="photoId === ''" (click)="getSpecific()">Get Specific</button>
   </mat-card>
-  <div class="card-container">
+  <br>
+  <mat-spinner *ngIf="apiLoading"></mat-spinner>
+  <div *ngIf="!apiLoading" class="card-container">
     <div *ngFor="let photo of listOfPhotos">
       <div class="card">
         ID: {{photo.id}}

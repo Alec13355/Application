@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
 
   clearAll(){
     this.listOfPhotos = [];
+    this.photoId = '';
   }
 
   getSpecific(){

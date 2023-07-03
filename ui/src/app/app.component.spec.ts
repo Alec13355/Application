@@ -34,7 +34,7 @@ describe('MinimalAPIService', () => {
         expect(data).toEqual(photos);
       });
   
-      const req = httpMock.expectOne('http://localhost:5000/GetAll');
+      const req = httpMock.expectOne('https://webapp.happybay-41fcc3d3.westus2.azurecontainerapps.io/GetAll');
       expect(req.request.method).toBe('GET');
       req.flush(photos);
     });
@@ -48,7 +48,7 @@ describe('MinimalAPIService', () => {
         expect(data).toEqual(photos);
       });
   
-      const req = httpMock.expectOne('http://localhost:5000/GetSpecific?photoId=1');
+      const req = httpMock.expectOne('https://webapp.happybay-41fcc3d3.westus2.azurecontainerapps.io/GetSpecific?photoId=1');
       expect(req.request.method).toBe('GET');
       req.flush(photos);
     });
@@ -57,7 +57,7 @@ describe('MinimalAPIService', () => {
       const photos: Photo[] = [{ id: 1, title: 'test' }];
       component.photoId = 'test';
       component.getSpecific();
-      httpMock.expectNone('http://localhost:5000/GetSpecific?photoId=1');
+      httpMock.expectNone('https://webapp.happybay-41fcc3d3.westus2.azurecontainerapps.io/GetSpecific?photoId=1');
     });
   });
 

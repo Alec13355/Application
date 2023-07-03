@@ -32,7 +32,7 @@ import { Configuration }                                     from '../configurat
 })
 export class MinimalAPIService {
 
-    protected basePath = 'http://localhost:5000';
+    protected basePath = 'https://webapp.happybay-41fcc3d3.westus2.azurecontainerapps.io';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;

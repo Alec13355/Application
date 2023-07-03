@@ -43,17 +43,6 @@ jobs:
           app_location: "./ui"
           app_artifact_location: "dist/ui"
 
-      # - name: Publish
-      #   run: dotnet publish minimalAPI/minimalAPI.csproj -c Release -o website
-
-      # - name: Deploy to Azure Web App
-      #   id: deploy-to-webapp
-      #   uses: azure/webapps-deploy@v2
-      #   with:
-      #     app-name: wapp-pli47gh5nfjwu
-      #     publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-      #     package: minimalAPI
-
       # Azure logout
       - name: logout
         run: |
